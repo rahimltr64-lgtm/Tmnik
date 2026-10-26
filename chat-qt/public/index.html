@@ -1,1 +1,175 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
+  <title>دردشة الأصدقاء QR</title>
+
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <main class="page-container">
+    <!-- شاشة الدخول -->
+    <section id="authView" class="auth-view">
+      <div class="brand">
+        <div class="brand-icon">QR</div>
+        <div>
+          <h1>دردشة الأصدقاء</h1>
+          <p>أنشئ مجموعة وادخل إليها فورًا عبر QR</p>
+        </div>
+      </div>
+
+      <div class="auth-card">
+        <label class="field-label" for="displayName">
+          اسمك داخل المجموعة
+        </label>
+
+        <input
+          id="displayName"
+          class="text-input"
+          type="text"
+          maxlength="40"
+          placeholder="مثال: أحمد"
+          autocomplete="name"
+        />
+
+        <div class="divider">
+          <span>إنشاء مجموعة جديدة</span>
+        </div>
+
+        <label class="field-label" for="groupTitle">
+          اسم المجموعة
+        </label>
+
+        <input
+          id="groupTitle"
+          class="text-input"
+          type="text"
+          maxlength="60"
+          placeholder="مجموعة الأصدقاء"
+        />
+
+        <button id="createGroupBtn" class="primary-button">
+          إنشاء المجموعة وعرض QR
+        </button>
+
+        <div class="divider">
+          <span>أو انضم إلى مجموعة</span>
+        </div>
+
+        <button
+          id="scanButton"
+          class="secondary-button"
+          type="button"
+        >
+          📷 مسح رمز QR
+        </button>
+
+        <div id="scannerSection" class="scanner-section" hidden>
+          <div id="qrReader"></div>
+          <p>وجّه الكاميرا نحو رمز QR الخاص بالمجموعة</p>
+        </div>
+
+        <label class="field-label" for="inviteInput">
+          أو الصق رابط الدعوة / كود المجموعة
+        </label>
+
+        <input
+          id="inviteInput"
+          class="text-input"
+          type="text"
+          placeholder="https://.../group/..."
+        />
+
+        <button id="joinButton" class="join-button">
+          الانضمام إلى المجموعة
+        </button>
+      </div>
+    </section>
+
+    <!-- شاشة الدردشة -->
+    <section id="chatView" class="chat-view" hidden>
+      <header class="chat-header">
+        <div>
+          <span class="online-dot"></span>
+          <strong id="groupName">المجموعة</strong>
+          <span id="connectionStatus" class="connection-status">
+            متصل
+          </span>
+        </div>
+
+        <button id="leaveButton" class="leave-button">
+          مغادرة
+        </button>
+      </header>
+
+      <div class="chat-layout">
+        <section class="messages-panel">
+          <div id="messages" class="messages"></div>
+
+          <form id="messageForm" class="message-form">
+            <input
+              id="messageInput"
+              type="text"
+              maxlength="1000"
+              placeholder="اكتب رسالتك..."
+              autocomplete="off"
+            />
+
+            <button type="submit" class="send-button">
+              إرسال
+            </button>
+          </form>
+        </section>
+
+        <aside class="sidebar">
+          <section class="sidebar-card">
+            <div class="sidebar-title">
+              <h3>الأعضاء</h3>
+              <span id="memberCount" class="member-count">0</span>
+            </div>
+
+            <div id="membersList" class="members-list"></div>
+          </section>
+
+          <section id="inviteCard" class="sidebar-card invite-card" hidden>
+            <h3>دعوة الأصدقاء</h3>
+            <p>اطلب من أصدقائك مسح هذا الرمز</p>
+
+            <img
+              id="qrImage"
+              class="qr-image"
+              alt="رمز QR الخاص بالمجموعة"
+            />
+
+            <input
+              id="inviteLink"
+              class="invite-link"
+              type="text"
+              readonly
+            />
+
+            <div class="invite-actions">
+              <button id="copyButton" class="secondary-button">
+                نسخ الرابط
+              </button>
+
+              <button id="shareButton" class="secondary-button">
+                مشاركة
+              </button>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="/vendor/html5-qrcode/html5-qrcode.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
